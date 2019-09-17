@@ -116,6 +116,19 @@ lab.experiment('alternatives', () => {
             }
         }
     },
+    {
+        method: 'POST',
+        path: '/store6/',
+        options: {
+            handler: Helper.defaultHandler,
+            tags: ['api'],
+            validate: {
+                payload: Joi.object({
+                    type: Joi.string().valid('string', 'number', 'image').label('Type'),
+                }).label('store6Payload')
+            }
+        }
+    },
     ];
 
 
@@ -139,7 +152,7 @@ lab.experiment('alternatives', () => {
                         'type': 'string'
                     }
                 ],
-                'name': 'body'
+                'name': 'Alt'
             }
         ]);
 
@@ -147,7 +160,7 @@ lab.experiment('alternatives', () => {
         expect(response.result.paths['/store2/'].post.parameters).to.equal([
             {
                 'in': 'body',
-                'name': 'body',
+                'name': 'Alt',
                 'schema': {
                     '$ref': '#/definitions/Alt'
                 },
@@ -248,7 +261,7 @@ lab.experiment('alternatives', () => {
 
         expect(response.result.paths['/store/'].post.parameters).to.equal([
             {
-                'name': 'body',
+                'name': 'Alt',
                 'in': 'body',
                 'schema': {
                     'type': 'number'
@@ -257,7 +270,7 @@ lab.experiment('alternatives', () => {
         ]);
         expect(response.result.paths['/store2/'].post.parameters).to.equal([
             {
-                'name': 'body',
+                'name': 'Alt',
                 'in': 'body',
                 'schema': {
                     '$ref': '#/definitions/Alt'
@@ -271,6 +284,16 @@ lab.experiment('alternatives', () => {
                 'name': 'body',
                 'schema': {
                     '$ref': '#/definitions/Model 1'
+                }
+            }
+        ]);
+
+        expect(response.result.paths['/store6/'].post.parameters).to.equal([
+            {
+                'in': 'body',
+                'name': 'store6Payload',
+                'schema': {
+                    '$ref': '#/definitions/store6Payload'
                 }
             }
         ]);
@@ -316,6 +339,19 @@ lab.experiment('alternatives', () => {
                     }
                 },
                 'type': 'object'
+            },
+            "store6Payload": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "string",
+                            "number",
+                            "image"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         });
 

@@ -266,7 +266,7 @@ lab.experiment('proxies', () => {
         expect(response.result.paths['/tools/microformats/'].post.parameters).to.equal([
             {
                 'in': 'body',
-                'name': 'body',
+                'name': 'testname',
                 'schema': {
                     '$ref': '#/definitions/testname'
                 }
